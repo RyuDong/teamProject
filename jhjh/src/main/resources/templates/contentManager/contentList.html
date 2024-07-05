@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콘텐츠 목록</title>
+</head>
+
+<th:block layout:fragment="css">
+    <style>
+        table {
+            text-align: center;
+        }
+
+        .button {
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        background-color: skyblue;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content" id="content_list">
+    <form role="form" method="get" th:action="@{'/admin/contentList/' + ${page}}" >
+        <h1>콘텐츠 목록</h1>
+        <table border="1" width="1000px">
+            <tr>
+                <td>수정</td>
+                <td>콘텐츠번호</td>
+                <td>콘텐츠명</td>
+                <td>콘텐츠유형</td>
+                <td>행사시작일</td>
+                <td>행사종료일</td>
+                <td>운영시간</td>
+                <td>휴무일</td>
+                <td>장소</td>
+            </tr>
+
+            <tr th:each="content : ${contents}" th:data-content-code="${content.contentCode}">
+                <td><a class=button th:href="@{'/admin/update/' + ${content.contentCode}}" type="submit">콘텐츠 수정</a></td>
+                <td id="contentCode" th:text="${content.contentCode}" >컨텐츠코드</td>
+                <td th:text="${content.contentTitle}">컨텐츠제목</td>
+                <td th:text="${content.contentType}">컨텐츠타입</td>
+                <td th:text="${content.startDate}">컨텐츠시작일</td>
+                <td th:text="${content.endDate}">컨텐츠끝일</td>
+                <td th:text="${content.runTime}">컨텐츠운영시간</td>
+                <td th:text="${content.dayOff}">컨텐츠쉬는일</td>
+                <td th:text="${content.place}">컨텐츠장소</td>
+            </tr>
+            <tr>
+                <td colspan="10"><a class=button href="/admin/addContent">콘텐츠 등록</a></td>
+            </tr>
+        </table>
+
+        <br><br><br>
+
+
+        <div th:with="start=${pageHandler.beginPage},end=${pageHandler.endPage}">
+            <ul class="pagination justify-content-center">
+
+                <li  th:if="${not pageHandler.firstPage}" class="page-item" th:classappend="${pageHandler.firstPage} ? 'disabled' : '' ">
+                    <a th:onclick="'javascript:page(' + ${page-1} + ')'" aria-label='Previous' class="page-link" >
+                        <span aria-hidden='true'>Previous</span>
+                    </a>
+                </li>
+
+                <li th:each="page : ${#numbers.sequence(start,end)}"  th:if="${page != 0}" th:classappend="${pageHandler.page eq page} ? 'active' : '' " class="page-item" >
+                    <a th:onclick="'javascript:page(' + ${page} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                </li>
+
+                <li th:if="${not pageHandler.lastPage}" th:classappend="${pageHandler.lastPage} ? 'disabled' : '' " class="page-item" >
+                    <a th:onclick="'javascript:page(' + ${page+1} + ')'" aria-label='Next' class="page-link">
+                        <span aria-hidden='true'>Next</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </form>
+</div>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(document).ready(function() {
+            let successMessage=/*[[${successMessage}]]*/ "";
+            if(successMessage != null) {
+                alert(successMessage);
+            }
+        })
+
+        $(document).ready(function() {
+            let errorMessage = /*[[${errorMessage}]]*/ "";
+            if (errorMessage != null && errorMessage != "") {
+                alert(errorMessage);
+            }
+            bindDomEvent();
+        });
+
+        function page(page) {
+            location.href="/admin/contentList/" + page;
+        }
+
+    </script>
+</th:block>
+
+</html>

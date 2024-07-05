@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.green.jhjh.MemberServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-13T06:51:39" hostname="GRR-404-17" time="1.85">
+  <properties/>
+  <testcase name="로그인 테스트" classname="com.green.jhjh.MemberServiceTest" time="1.85"/>
+  <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-06-13T15:51:37.543+09:00  INFO 10964 --- [    Test worker] c.g.j.MemberServiceTest                  : Starting MemberServiceTest using Java 17.0.10 with PID 10964 (started by GreenArt in C:\Users\GreenArt\SpringBoot\jhjh\jhjh)
+2024-06-13T15:51:37.555+09:00  INFO 10964 --- [    Test worker] c.g.j.MemberServiceTest                  : No active profile set, falling back to 1 default profile: "default"
+2024-06-13T15:51:38.223+09:00  INFO 10964 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-06-13T15:51:38.223+09:00  INFO 10964 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2024-06-13T15:51:38.881+09:00  INFO 10964 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-13T15:51:39.068+09:00  INFO 10964 --- [    Test worker] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5cd701e4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6c9151c1, org.springframework.security.web.context.SecurityContextHolderFilter@1c135f63, org.springframework.security.web.header.HeaderWriterFilter@7d3bcd3, org.springframework.web.filter.CorsFilter@2c3679e5, org.springframework.security.web.csrf.CsrfFilter@4f2fdf3d, org.springframework.security.web.authentication.logout.LogoutFilter@20a946d9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1feb586d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29bd2796, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@174b8d0e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@41f40dfa, org.springframework.security.web.access.ExceptionTranslationFilter@391dfe7c, org.springframework.security.web.access.intercept.AuthorizationFilter@18b3db6e]
+2024-06-13T15:51:39.382+09:00  INFO 10964 --- [    Test worker] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.connection                             : 1. Connection opened
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.new Connection returned 
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getNetworkTimeout() returned 0
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.isValid(1) returned true
+2024-06-13T15:51:39.460+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getTransactionIsolation() returned 4
+2024-06-13T15:51:39.476+09:00  INFO 10964 --- [    Test worker] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@61246109
+2024-06-13T15:51:39.476+09:00  INFO 10964 --- [    Test worker] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-06-13T15:51:39.476+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getMetaData() returned org.mariadb.jdbc.DatabaseMetaData@4d79d187
+2024-06-13T15:51:39.491+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.clearWarnings() returned 
+2024-06-13T15:51:39.589+09:00  INFO 10964 --- [onnection adder] j.connection                             : 2. Connection opened
+2024-06-13T15:51:39.589+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 2. Connection.new Connection returned 
+2024-06-13T15:51:39.589+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 2. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.589+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 2. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.604+09:00  INFO 10964 --- [onnection adder] j.connection                             : 3. Connection opened
+2024-06-13T15:51:39.604+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 3. Connection.new Connection returned 
+2024-06-13T15:51:39.604+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 3. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.604+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 3. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.620+09:00  INFO 10964 --- [onnection adder] j.connection                             : 4. Connection opened
+2024-06-13T15:51:39.620+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 4. Connection.new Connection returned 
+2024-06-13T15:51:39.620+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 4. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.620+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 4. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.635+09:00  INFO 10964 --- [onnection adder] j.connection                             : 5. Connection opened
+2024-06-13T15:51:39.635+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 5. Connection.new Connection returned 
+2024-06-13T15:51:39.635+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 5. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.635+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 5. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.651+09:00  INFO 10964 --- [onnection adder] j.connection                             : 6. Connection opened
+2024-06-13T15:51:39.651+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 6. Connection.new Connection returned 
+2024-06-13T15:51:39.651+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 6. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.651+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 6. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.670+09:00  INFO 10964 --- [onnection adder] j.connection                             : 7. Connection opened
+2024-06-13T15:51:39.670+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 7. Connection.new Connection returned 
+2024-06-13T15:51:39.670+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 7. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.670+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 7. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.675+09:00  INFO 10964 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-13T15:51:39.675+09:00  INFO 10964 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+2024-06-13T15:51:39.675+09:00  INFO 10964 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+2024-06-13T15:51:39.693+09:00  INFO 10964 --- [onnection adder] j.connection                             : 8. Connection opened
+2024-06-13T15:51:39.694+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 8. Connection.new Connection returned 
+2024-06-13T15:51:39.694+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 8. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.694+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 8. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.697+09:00  INFO 10964 --- [    Test worker] c.g.j.MemberServiceTest                  : Started MemberServiceTest in 2.458 seconds (process running for 3.697)
+2024-06-13T15:51:39.712+09:00  INFO 10964 --- [onnection adder] j.connection                             : 9. Connection opened
+2024-06-13T15:51:39.712+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 9. Connection.new Connection returned 
+2024-06-13T15:51:39.712+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 9. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.712+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 9. Connection.getAutoCommit() returned true
+2024-06-13T15:51:39.732+09:00  INFO 10964 --- [onnection adder] j.connection                             : 10. Connection opened
+2024-06-13T15:51:39.732+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 10. Connection.new Connection returned 
+2024-06-13T15:51:39.732+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 10. Connection.isReadOnly() returned false
+2024-06-13T15:51:39.732+09:00  INFO 10964 --- [onnection adder] j.audit                                  : 10. Connection.getAutoCommit() returned true
+2024-06-13T15:51:40.503+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.isValid(5) returned true
+2024-06-13T15:51:40.503+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getAutoCommit() returned true
+2024-06-13T15:51:40.503+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.new PreparedStatement returned 
+2024-06-13T15:51:40.503+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.prepareStatement(SELECT member_code, member_id, member_pw, member_name, email, member_tel, gender, birthday, address, nickname, role
+        FROM member
+        WHERE member_id = ?) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@629dfb5a
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.setString(1, "admin") returned 
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.sqlonly                                : SELECT member_code, member_id, member_pw, member_name, email, member_tel, gender, birthday, address, nickname, role
+        FROM member
+        WHERE member_id = 'admin'
+
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.sqltiming                              : SELECT member_code, member_id, member_pw, member_name, email, member_tel, gender, birthday, address, nickname, role
+        FROM member
+        WHERE member_id = 'admin'
+ {executed in 0 msec}
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.execute() returned true
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.new ResultSet returned 
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@26caf4b6
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getMetaData() returned org.mariadb.jdbc.client.result.ResultSetMetaData@3b39bee2
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getType() returned 1003
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.516+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(member_code) returned 5
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(member_id) returned admin
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(member_pw) returned $2a$10$lgjG7gUhr2jBHyrDzSRTSeOXIlYrp1/Xpu3i8chPzki/lljBMtna2
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(member_name) returned 관리자
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(email) returned omj3737@naver.com
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(member_tel) returned 010-3054-7227
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(gender) returned 여
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(birthday,class java.time.LocalDate) returned 1993-10-08
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(address) returned 울산 남구 달동
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(nickname) returned 오메
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(role) returned ADMIN
+2024-06-13T15:51:40.532+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.resultsettable                         : 
+|------------|----------|-------------------------------------------------------------|------------|------------------|--------------|-------|---------|---------|---------|------|
+|member_code |member_id |member_pw                                                    |member_name |email             |member_tel    |gender |birthday |address  |nickname |role  |
+|------------|----------|-------------------------------------------------------------|------------|------------------|--------------|-------|---------|---------|---------|------|
+|5           |admin     |$2a$10$lgjG7gUhr2jBHyrDzSRTSeOXIlYrp1/Xpu3i8chPzki/lljBMtna2 |관리자         |omj3737@naver.com |010-3054-7227 |여      |[unread] |울산 남구 달동 |오메       |ADMIN |
+|------------|----------|-------------------------------------------------------------|------------|------------------|--------------|-------|---------|---------|---------|------|
+
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned false
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.close() returned void
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getMetaData() returned org.mariadb.jdbc.DatabaseMetaData@951461a
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getMoreResults() returned false
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.close() returned 
+2024-06-13T15:51:40.536+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.clearWarnings() returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getAutoCommit() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.new PreparedStatement returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.prepareStatement(SELECT content_img_code, c.content_code, img_name, ori_img_name, img_url, rep_img_yn
+        FROM contents c JOIN content_img ci ON c.content_code = ci.content_code
+        WHERE c.content_code = ?;) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@714d7c7b
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.setInt(1, 14) returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.sqlonly                                : SELECT content_img_code, c.content_code, img_name, ori_img_name, img_url, rep_img_yn
+        FROM contents c JOIN content_img ci ON c.content_code = ci.content_code
+        WHERE c.content_code = 14;
+
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.sqltiming                              : SELECT content_img_code, c.content_code, img_name, ori_img_name, img_url, rep_img_yn
+        FROM contents c JOIN content_img ci ON c.content_code = ci.content_code
+        WHERE c.content_code = 14;
+ {executed in 0 msec}
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.execute() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.new ResultSet returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@5605a59b
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getMetaData() returned org.mariadb.jdbc.client.result.ResultSetMetaData@4e8b36af
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getType() returned 1003
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_img_code) returned 21
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_name) returned 22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(ori_img_name) returned 옹기축제1.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(rep_img_yn) returned Y
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_img_code) returned 22
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_name) returned ec278b97-0b9c-4d68-95fa-5ef53a2b3843.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(ori_img_name) returned 옹기축제2.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/ec278b97-0b9c-4d68-95fa-5ef53a2b3843.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(rep_img_yn) returned N
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_img_code) returned 23
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_name) returned 69205b0a-4446-4d4b-9ecf-0a5b5ba54528.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(ori_img_name) returned 옹기축제3.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/69205b0a-4446-4d4b-9ecf-0a5b5ba54528.jpg
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(rep_img_yn) returned N
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_img_code) returned 24
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_name) returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(ori_img_name) returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned void
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(rep_img_yn) returned N
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_img_code) returned 25
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_name) returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(ori_img_name) returned 
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned void
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(rep_img_yn) returned N
+2024-06-13T15:51:40.630+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.resultsettable                         : 
+|-----------------|-------------|-----------------------------------------|-------------|---------------------------------------------------------|-----------|
+|content_img_code |content_code |img_name                                 |ori_img_name |img_url                                                  |rep_img_yn |
+|-----------------|-------------|-----------------------------------------|-------------|---------------------------------------------------------|-----------|
+|21               |14           |22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg |옹기축제1.jpg    |/images/content/22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg |Y          |
+|22               |14           |ec278b97-0b9c-4d68-95fa-5ef53a2b3843.jpg |옹기축제2.jpg    |/images/content/ec278b97-0b9c-4d68-95fa-5ef53a2b3843.jpg |N          |
+|23               |14           |69205b0a-4446-4d4b-9ecf-0a5b5ba54528.jpg |옹기축제3.jpg    |/images/content/69205b0a-4446-4d4b-9ecf-0a5b5ba54528.jpg |N          |
+|24               |14           |                                         |             |null                                                     |N          |
+|25               |14           |                                         |             |null                                                     |N          |
+|-----------------|-------------|-----------------------------------------|-------------|---------------------------------------------------------|-----------|
+
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned false
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.close() returned void
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getMetaData() returned org.mariadb.jdbc.DatabaseMetaData@d164938
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getMoreResults() returned false
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.close() returned 
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.clearWarnings() returned 
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getAutoCommit() returned true
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.new PreparedStatement returned 
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.prepareStatement(SELECT c.content_code, content_title, content_type, start_date, end_date, place, run_time, day_off,
+        content_option_code, toilet, parking_lot, for_kids, cost, description_short, description_long
+        FROM contents c JOIN content_option co ON c.content_code=co.content_code
+        WHERE c.content_code = ?;) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@4cd079fe
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.setInt(1, 14) returned 
+2024-06-13T15:51:40.640+09:00  INFO 10964 --- [    Test worker] j.sqlonly                                : SELECT c.content_code, content_title, content_type, start_date, end_date, place, run_time, day_off,
+        content_option_code, toilet, parking_lot, for_kids, cost, description_short, description_long
+        FROM contents c JOIN content_option co ON c.content_code=co.content_code
+        WHERE c.content_code = 14;
+
+2024-06-13T15:51:40.645+09:00  INFO 10964 --- [    Test worker] j.sqltiming                              : SELECT c.content_code, content_title, content_type, start_date, end_date, place, run_time, day_off,
+        content_option_code, toilet, parking_lot, for_kids, cost, description_short, description_long
+        FROM contents c JOIN content_option co ON c.content_code=co.content_code
+        WHERE c.content_code = 14;
+ {executed in 5 msec}
+2024-06-13T15:51:40.645+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.execute() returned true
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.new ResultSet returned 
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@37823482
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getMetaData() returned org.mariadb.jdbc.client.result.ResultSetMetaData@202b5293
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getType() returned 1003
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.646+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_title) returned 울산옹기축제
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_type) returned 축제
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(start_date,class java.time.LocalDate) returned 2024-05-04
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(end_date,class java.time.LocalDate) returned 2024-05-06
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(place) returned 울주군 외고산 옹기마을 일대
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(run_time) returned 09:00~18:00
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(day_off) returned void
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_option_code) returned 5
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(toilet) returned 유
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(parking_lot) returned 유
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(for_kids) returned 전체관람가
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(cost) returned 무료
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(description_short) returned 울산옹기축제는 한민족과 천 년이 넘는 시간동안 함께 한 ‘옹기’를 주제로 특화시킨 국내 유일의 축제이다.
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(description_long) returned 옹기를 전통 방식으로 제작하고 있는 울주군 외고산 옹기마을에서 축제가 개최됨에 따라 자연스럽게 지역 대표 특산물인 옹기를 홍보하고 생활 옹기의 보급과 전통산업의 발전에 이바지하고 있다.
+장인들의 옹기 만들기 시연을 볼 수 있을 뿐 아니라 직접 흙을 밟고, 옹기를 빚어 구워볼 수 있다. 옹기축제는 2000년 11월 외고산에 거주하던 옹기 장인들 주민 화합의 장으로 마련한 행사에서 시작한 울산옹기축제는 울산에서는 유일하게 문화체육관광부 지정 2024∼2025 문화관광축제로 선정되고, 8년 연속 대한민국 축제콘텐츠 대상을 수상했다. 
+또한 외부 관광객 비율이 과반을 넘으면서 지역 대표 축제에서 대한민국 대표 축제로의 도약을 꿈꾸고 있다.
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultsettable                         : 
+|-------------|--------------|-------------|-----------|---------|----------------|------------|--------|--------------------|-------|------------|---------|-----|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|content_code |content_title |content_type |start_date |end_date |place           |run_time    |day_off |content_option_code |toilet |parking_lot |for_kids |cost |description_short                                          |description_long                                                                                                                                                                                                                                                                                                                                                        |
+|-------------|--------------|-------------|-----------|---------|----------------|------------|--------|--------------------|-------|------------|---------|-----|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|14           |울산옹기축제        |축제           |[unread]   |[unread] |울주군 외고산 옹기마을 일대 |09:00~18:00 |null    |5                   |유      |유           |전체관람가    |무료   |울산옹기축제는 한민족과 천 년이 넘는 시간동안 함께 한 ‘옹기’를 주제로 특화시킨 국내 유일의 축제이다. |옹기를 전통 방식으로 제작하고 있는 울주군 외고산 옹기마을에서 축제가 개최됨에 따라 자연스럽게 지역 대표 특산물인 옹기를 홍보하고 생활 옹기의 보급과 전통산업의 발전에 이바지하고 있다.
+장인들의 옹기 만들기 시연을 볼 수 있을 뿐 아니라 직접 흙을 밟고, 옹기를 빚어 구워볼 수 있다. 옹기축제는 2000년 11월 외고산에 거주하던 옹기 장인들 주민 화합의 장으로 마련한 행사에서 시작한 울산옹기축제는 울산에서는 유일하게 문화체육관광부 지정 2024∼2025 문화관광축제로 선정되고, 8년 연속 대한민국 축제콘텐츠 대상을 수상했다. 
+또한 외부 관광객 비율이 과반을 넘으면서 지역 대표 축제에서 대한민국 대표 축제로의 도약을 꿈꾸고 있다. |
+|-------------|--------------|-------------|-----------|---------|----------------|------------|--------|--------------------|-------|------------|---------|-----|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned false
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.close() returned void
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getMetaData() returned org.mariadb.jdbc.DatabaseMetaData@1f4b8027
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getMoreResults() returned false
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.close() returned 
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.clearWarnings() returned 
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getAutoCommit() returned true
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.new PreparedStatement returned 
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.prepareStatement(SELECT c.content_code, content_title, content_type, start_date, end_date, run_time, day_off, place,
+        DESCRIPTION_short, img_url
+        from contents c JOIN content_option co ON c.content_code = co.content_code
+        JOIN content_img ci ON c.content_code=ci.content_code
+        WHERE rep_img_yn = 'Y';) returned net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy@769b1d1c
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.sqlonly                                : SELECT c.content_code, content_title, content_type, start_date, end_date, run_time, day_off, place,
+        DESCRIPTION_short, img_url
+        from contents c JOIN content_option co ON c.content_code = co.content_code
+        JOIN content_img ci ON c.content_code=ci.content_code
+        WHERE rep_img_yn = 'Y';
+
+2024-06-13T15:51:40.648+09:00  INFO 10964 --- [    Test worker] j.sqltiming                              : SELECT c.content_code, content_title, content_type, start_date, end_date, run_time, day_off, place,
+        DESCRIPTION_short, img_url
+        from contents c JOIN content_option co ON c.content_code = co.content_code
+        JOIN content_img ci ON c.content_code=ci.content_code
+        WHERE rep_img_yn = 'Y';
+ {executed in 0 msec}
+2024-06-13T15:51:40.654+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.execute() returned true
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.new ResultSet returned 
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getResultSet() returned net.sf.log4jdbc.sql.jdbcapi.ResultSetSpy@c5e7696
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getMetaData() returned org.mariadb.jdbc.client.result.ResultSetMetaData@4f579582
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getType() returned 1003
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.655+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 14
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_title) returned 울산옹기축제
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_type) returned 축제
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(start_date,class java.time.LocalDate) returned 2024-05-04
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(end_date,class java.time.LocalDate) returned 2024-05-06
+2024-06-13T15:51:40.656+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(run_time) returned 09:00~18:00
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(day_off) returned void
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(place) returned 울주군 외고산 옹기마을 일대
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(DESCRIPTION_short) returned 울산옹기축제는 한민족과 천 년이 넘는 시간동안 함께 한 ‘옹기’를 주제로 특화시킨 국내 유일의 축제이다.
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 15
+2024-06-13T15:51:40.657+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_title) returned 울산조선해양축제
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_type) returned 축제
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(start_date,class java.time.LocalDate) returned 2024-07-23
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(end_date,class java.time.LocalDate) returned 2024-07-25
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(run_time) returned 19:30~22:00
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(day_off) returned void
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(place) returned 동구 일산해수욕장
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(DESCRIPTION_short) returned 함께 즐기는 축제의 바다 울산조선해양축제.
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/4f6ea31b-cdc2-4685-bf36-617156085a66.jpg
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned true
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getInt(content_code) returned 16
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_title) returned 마두희축제
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(content_type) returned 축제
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(start_date,class java.time.LocalDate) returned 2024-06-14
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getObject(end_date,class java.time.LocalDate) returned 2024-06-16
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(run_time) returned 19:00~22:00
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(day_off) returned void
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(place) returned 중구 태화강, 성남동 일대 
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(DESCRIPTION_short) returned 함께하면 커지는 힘, 태화강에 있다태화강 마두희 축제
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.getString(img_url) returned /images/content/1a59a29e-e6ce-426f-b4e3-cabcc72dcb06.png
+2024-06-13T15:51:40.658+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.isClosed() returned false
+2024-06-13T15:51:40.660+09:00  INFO 10964 --- [    Test worker] j.resultsettable                         : 
+|-------------|--------------|-------------|-----------|---------|------------|--------|----------------|-----------------------------------------------------------|---------------------------------------------------------|
+|content_code |content_title |content_type |start_date |end_date |run_time    |day_off |place           |description_short                                          |img_url                                                  |
+|-------------|--------------|-------------|-----------|---------|------------|--------|----------------|-----------------------------------------------------------|---------------------------------------------------------|
+|14           |울산옹기축제        |축제           |[unread]   |[unread] |09:00~18:00 |null    |울주군 외고산 옹기마을 일대 |울산옹기축제는 한민족과 천 년이 넘는 시간동안 함께 한 ‘옹기’를 주제로 특화시킨 국내 유일의 축제이다. |/images/content/22b1042a-6c58-4e7c-8828-27f4c8a2e410.jpg |
+|15           |울산조선해양축제      |축제           |[unread]   |[unread] |19:30~22:00 |null    |동구 일산해수욕장       |함께 즐기는 축제의 바다 울산조선해양축제.                                    |/images/content/4f6ea31b-cdc2-4685-bf36-617156085a66.jpg |
+|16           |마두희축제         |축제           |[unread]   |[unread] |19:00~22:00 |null    |중구 태화강, 성남동 일대  |함께하면 커지는 힘, 태화강에 있다태화강 마두희 축제                              |/images/content/1a59a29e-e6ce-426f-b4e3-cabcc72dcb06.png |
+|-------------|--------------|-------------|-----------|---------|------------|--------|----------------|-----------------------------------------------------------|---------------------------------------------------------|
+
+2024-06-13T15:51:40.661+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.next() returned false
+2024-06-13T15:51:40.661+09:00  INFO 10964 --- [    Test worker] j.resultset                              : 1. ResultSet.close() returned void
+2024-06-13T15:51:40.661+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.getMetaData() returned org.mariadb.jdbc.DatabaseMetaData@4769e70c
+2024-06-13T15:51:40.661+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getMoreResults() returned false
+2024-06-13T15:51:40.662+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.getUpdateCount() returned -1
+2024-06-13T15:51:40.662+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. PreparedStatement.close() returned 
+2024-06-13T15:51:40.662+09:00  INFO 10964 --- [    Test worker] j.audit                                  : 1. Connection.clearWarnings() returned 
+2024-06-13T15:51:41.500+09:00  WARN 10964 --- [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][layouts/layout] Deprecated unwrapped fragment expression "fragments/header::header" found in template layouts/layout, line 32, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/header::header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-06-13T15:51:41.546+09:00  WARN 10964 --- [    Test worker] actStandardFragmentInsertionTagProcessor : [THYMELEAF][Test worker][layouts/layout] Deprecated unwrapped fragment expression "fragments/footer::footer" found in template layouts/layout, line 36, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/footer::footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

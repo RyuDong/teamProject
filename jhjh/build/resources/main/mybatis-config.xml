@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+       <typeAlias alias="contentDtlDto" type="com.green.jhjh.contentDtl.dto.ContentDtlDto" />
+        <typeAlias alias="contentSearchDto" type="com.green.jhjh.contentDtl.dto.ContentSearchDto" />
+
+        <typeAlias alias="commentDto" type="com.green.jhjh.starComment.dto.CommentDto" />
+        <typeAlias alias="starPointDto" type="com.green.jhjh.starComment.dto.StarPointDto"/>
+
+        <typeAlias alias="contentsDto" type="com.green.jhjh.contentManager.dto.ContentsDto" />
+        <typeAlias alias="contentImgDto" type="com.green.jhjh.contentManager.dto.ContentImgDto"/>
+        <typeAlias alias="contentOptionDto" type="com.green.jhjh.contentManager.dto.ContentOptionDto" />
+        <typeAlias alias="holderDto" type="com.green.jhjh.contentManager.dto.HolderDto"/>
+        <typeAlias alias="creatorDto" type="com.green.jhjh.contentManager.dto.CreatorDto" />
+
+        <typeAlias alias="memberDto" type="com.green.jhjh.member.dto.MemberDto"/>
+    </typeAliases>
+
+</configuration>

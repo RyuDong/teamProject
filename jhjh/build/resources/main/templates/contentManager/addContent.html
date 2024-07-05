@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block layout:fragment="css">
+    <style>
+        .descriptionShort{
+           width: 800px;
+           height: 50px;
+       }
+
+        .descriptionLong{
+           width: 800px;
+           height: 150px;
+       }
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content">
+    <form role="form" method="post" enctype="multipart/form-data" th:object="${contentForm}">
+        <input type="hidden" th:field="*{contentCode}">
+        <input type="hidden" th:field="*{contentOptionCode}">
+        <div th:if="${#strings.isEmpty(contentForm.contentCode)}">
+            <p class="h2">등록하기</p>
+        </div>
+        <div th:unless="${#strings.isEmpty(contentForm.contentCode)}">
+            <p class="h2">수정하기</p>
+        </div>
+
+        <table>
+            <tr>
+                <th>콘텐츠명</th>
+                <td>
+                    <input th:field="*{contentTitle}" placeholder="콘텐츠이름 입력">
+                    <p th:if="${#fields.hasErrors('contentTitle')}" th:errors="*{contentTitle}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>콘텐츠유형</th>
+                <td>
+                    <input th:field="*{contentType}" placeholder="콘텐츠 유형 입력">
+                    <p th:if="${#fields.hasErrors('contentType')}" th:errors="*{contentType}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>행사시작일</th>
+                <td>
+                    <div  th:if="${#strings.isEmpty(contentForm.contentCode)}">
+                        <input th:field="*{startDate}" type="date" placeholder="행사시작일 입력">
+                        <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p>
+                    </div>
+                    <div th:unless="${#strings.isEmpty(contentForm.contentCode)}">
+                        <input th:field="*{startDate}" type="text" placeholder="행사시작일 입력">
+                        <p>24. 01. 01. 형식으로 입력하세요.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>행사종료일</th>
+                <td>
+                    <div  th:if="${#strings.isEmpty(contentForm.contentCode)}">
+                        <input th:field="*{endDate}" type="date" placeholder="행사종료일 입력">
+                        <p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
+                    </div>
+                    <div th:unless="${#strings.isEmpty(contentForm.contentCode)}">
+                        <input th:field="*{endDate}" type="text" placeholder="행사종료일 입력">
+                        <p>24. 01. 01. 형식으로 입력하세요.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>장소</th>
+                <td>
+                    <input th:field="*{place}" type="text" placeholder="장소 입력">
+                    <p th:if="${#fields.hasErrors('place')}" th:errors="*{place}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>운영시간</th>
+                <td>
+                    <input th:field="*{runTime}" type="text" placeholder="운영시간 입력">
+                </td>
+            </tr>
+            <tr>
+                <th>휴무일</th>
+                <td>
+                    <input th:field="*{dayOff}" type="text" placeholder="휴무일 입력">
+                </td>
+            </tr>
+            <tr>
+                <th>화장실 유무</th>
+                <td>
+                    <select th:field="*{toilet}">
+                        <option value="O">있음</option>
+                        <option value="X">없음</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('toilet')}" th:errors="*{toilet}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>주차장 유무</th>
+                <td>
+                    <select th:field="*{parkingLot}">
+                        <option value="O">있음</option>
+                        <option value="X">없음</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('parkingLot')}" th:errors="*{parkingLot}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>아이동반 유무</th>
+                <td>
+                    <select th:field="*{forKids}">
+                        <option value="O">가능</option>
+                        <option value="X">불가능</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('forKids')}" th:errors="*{forKids}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>요금</th>
+                <td><input th:field="*{cost}" type="text" placeholder="입장 요금을 입력해주세요"></td>
+                <p th:if="${#fields.hasErrors('cost')}" th:error="*{cost}"></p>
+            </tr>
+            <tr>
+                <th>간략 콘텐츠 소개</th>
+                <td><textarea th:field="*{descriptionShort}" type="text" placeholder="간략 콘텐츠 소개를 써주세요" class="descriptionShort"></textarea></td>
+                <p th:if="${#fields.hasErrors('descriptionShort')}" th:error="*{descriptionShort}"></p>
+            </tr>
+            <tr>
+                <th>전체 콘텐츠 소개</th>
+                <td><textarea th:field="*{descriptionLong}" type="text" placeholder="전체 콘텐츠 소개를 써주세요" class="descriptionLong"></textarea></td>
+                <p th:if="${#fields.hasErrors('descriptionLong')}" th:error="*{descriptionLong}"></p>
+            </tr>
+        </table>
+
+        <hr>
+
+        <div th:if="${#lists.isEmpty(contentForm.contentImgFileList)}">
+            <div th:each="num : ${#numbers.sequence(1, 5)}">
+                <div class="custom-file img-div">
+                    <input type="file" class="custom-file-input" name="contentImgFile">
+                    <label class="custom-file-label"  th:text="컨텐츠사진 + ${num}" ></label>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(contentForm.contentImgFileList)}">
+            <div th:each="contentImg, status: ${contentForm.contentImgFileList}">
+                <div class="custom-file img-div">
+                    <input type="file" class="custom-file-input" name="contentImgFile" >
+                    <input type="hidden" name="contentImgCodes" th:value="${contentImg.contentImgCode}">
+                    <label class="custom-file-label" th:text="${not #strings.isEmpty(contentImg.oriImgName)} ? ${contentImg.oriImgName} : '상품이미지 ' + ${status.index + 1}"></label>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <table>
+            <tr>
+                <th>주최자명</th>
+                <td>
+                    <input th:field="*{holderName}" placeholder="주최자명 입력">
+                </td>
+            </tr>
+            <tr>
+                <th>개인구분</th>
+                <td>
+                    <select th:field="*{individual}">
+                        <option value="개인">개인</option>
+                        <option value="단체">단체</option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('individual')}" th:errors="*{individual}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>문의처</th>
+                <td>
+                    <input th:field="*{enquiry}" placeholder="문의처 입력">
+                </td>
+            </tr>            <tr>
+            <th>문의처전화번호</th>
+            <td>
+                <input th:field="*{enquiryTel}" placeholder="052-xxx-xxxx">
+            </td>
+        </tr>
+        </table>
+
+        <hr>
+
+        <table>
+            <tr>
+                <th>참여자명</th>
+                <td>
+                    <input th:field="*{creatorName}" placeholder="참여자명 입력">
+                    <p th:if="${#fields.hasErrors('creatorName')}" th:errors="*{creatorName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>참여자 전화번호</th>
+                <td>
+                    <input th:field="*{creatorTel}" placeholder="010-xxxx-xxxx">
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+
+        <div th:if="${#strings.isEmpty(contentForm.contentCode)}" style="text-align:center">
+            <button th:formaction="@{/admin/content/new}" type="submit">등록하기</button>
+        </div>
+        <div th:unless="${#strings.isEmpty(contentForm.contentCode)}" style="text-align:center">
+            <button th:formaction="@{'/admin/update/' +${contentForm.contentCode}}" type="submit">수정하기</button>
+        </div>
+        <div th:unless="${#strings.isEmpty(contentForm.contentCode)}" style="text-align:center">
+            <button th:formaction="@{'/admin/delete/' +${contentForm.contentCode}}" type="submit">삭제하기</button>
+        </div>
+    </form>
+</div>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            let errorMessage = /*[[${errorMessage}]]*/ "";
+            if (errorMessage != null && errorMessage != "") {
+                alert(errorMessage);
+            }
+            bindDomEvent();
+        });
+
+        function bindDomEvent() {
+            $(".custom-file-input").on("change", function() {
+                let fileName = $(this).val().split("\\").pop();
+                let fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+
+                if (["jpg", "jpeg", "gif", "png", "bmp"].indexOf(fileExt) === -1) {
+                    alert("이미지 파일만 등록 가능합니다.");
+                    return;
+                }
+
+                $(this).siblings(".custom-file-label").html(fileName);
+            });
+        }
+    </script>
+</th:block>
+
+
+</html>

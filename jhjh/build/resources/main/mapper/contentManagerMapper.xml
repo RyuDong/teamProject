@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.jhjh.contentManager.mapper.ContentMapper">
+
+    <select id="selectContentsAll" resultType="contentsDto" parameterType="map">
+        select content_code, content_title, content_type, start_date, end_date, run_time, day_off, place
+        from contents
+        ORDER BY content_code DESC
+        LIMIT #{pageSize} OFFSET #{page};
+    </select>
+
+    <select id="countContents">
+        SELECT COUNT(*)
+        from contents;
+    </select>
+
+    <insert id="insertContents" parameterType="contentsDto" useGeneratedKeys="true" keyColumn="content_code" keyProperty="contentCode">
+        insert into contents (content_title, content_type, start_date, end_date, place, run_time, day_off)
+        values (#{contentTitle}, #{contentType}, #{startDate}, #{endDate}, #{place}, #{runTime}, #{dayOff} )
+    </insert>
+
+    <insert id="insertContentOption" parameterType="contentOptionDto" useGeneratedKeys="true" keyColumn="content_option_code" keyProperty="contentOptionCode">
+        insert into content_option (content_code, toilet, parking_lot, for_kids, cost, description_short, description_long)
+        values (#{contentCode},#{toilet},#{parkingLot},#{forKids},#{cost},#{descriptionShort},#{descriptionLong})
+    </insert>
+
+    <insert id="insertContentImg" parameterType="contentImgDto">
+        insert into content_img (content_code, img_name, ori_img_name, img_url, rep_img_yn)
+        values (#{contentCode}, #{imgName}, #{oriImgName}, #{imgUrl}, #{repImgYn})
+    </insert>
+
+    <insert id="insertHolder" parameterType="holderDto" useGeneratedKeys="true" keyProperty="holderCode" keyColumn="holder_code">
+        insert into holder (content_code, holder_name, individual, enquiry, enquiry_tel)
+        values (#{contentCode}, #{holderName}, #{individual}, #{enquiry}, #{enquiryTel})
+    </insert>
+
+    <insert id="insertCreator" parameterType="creatorDto" useGeneratedKeys="true" keyColumn="creator_code" keyProperty="creatorCode">
+        insert into creator(content_code, creator_name, creator_tel)
+        values (#{contentCode}, #{creatorName}, #{creatorTel})
+    </insert>
+
+    <select id="selectContents">
+        select content_code, content_title, content_type, start_date, end_date, run_time, day_off, place
+        from contents
+        where content_code = #{contentCode};
+    </select>
+
+    <select id="selectContentOption" >
+        select content_option_code, content_code, toilet, parking_lot, for_kids, cost, description_short, description_long
+        from content_option
+        where content_code = #{contentCode}
+    </select>
+
+    <select id="selectHolder" resultType="holderDto" parameterType="int">
+        select holder_code, content_code, holder_name, individual, enquiry, enquiry_tel
+        from holder
+        where content_code = #{contentCode}
+    </select>
+
+    <select id="selectCreator" resultType="creatorDto" parameterType="int">
+        select creator_code, content_code, creator_name, creator_tel
+        from creator
+        where content_code = #{contentCode}
+    </select>
+
+    <select id="getContentImgList" resultType="contentImgDto">
+        select content_img_code, content_code, img_name, ori_img_name, img_url, rep_img_yn
+        from content_img
+        where content_code = #{contentCode}
+    </select>
+
+    <select id="selectContentImg" resultType="contentImgDto">
+        select content_img_code, content_code, img_name, ori_img_name, img_url, rep_img_yn
+        from content_img
+        where content_img_code = #{contentImgCode}
+    </select>
+
+    <delete id="deleteContent" parameterType="int">
+        DELETE FROM contents WHERE content_code = #{contentCode}
+    </delete>
+
+    <update id="updateContent" parameterType="contentsDto">
+        update contents
+        set content_title = #{contentTitle}, content_type = #{contentType}, start_date = #{startDate}, end_date=#{endDate},
+        run_time = #{runTime}, day_off=#{dayOff}, place=#{place}
+        where content_code = #{contentCode}
+    </update>
+
+    <update id="updateContentOption" parameterType="contentOptionDto">
+        update content_option
+        set toilet=#{toilet}, parking_lot=#{parkingLot}, for_kids=#{forKids}, cost=#{cost}, description_short=#{descriptionShort}, description_long=#{descriptionLong}
+        where content_code = #{contentCode}
+    </update>
+
+    <update id="updateContentImg" parameterType="contentImgDto">
+        update content_img
+        set content_code = #{contentCode}, img_name=#{imgName}, ori_img_name=#{oriImgName}, img_url = #{imgUrl}, rep_img_yn=#{repImgYn}
+        where content_img_code = #{contentImgCode}
+    </update>
+
+    <update id="updateHolder" parameterType="holderDto">
+        update holder
+        set holder_name=#{holderName}, individual=#{individual}, enquiry=#{enquiry}, enquiry_tel=#{enquiryTel}
+        where content_code = #{contentCode}
+    </update>
+
+    <update id="updateCreator" parameterType="creatorDto">
+        update creator
+        set creator_name=#{creatorName}, creator_tel=#{creatorTel}
+        where content_code=#{contentCode}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mariadb://localhost:3306/jhjh
+    username: boot
+    password: 1234
+
+  thymeleaf:
+    cache: false
+
+  devtools:
+    restart:
+      enabled: true
+
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 100MB
+
+contentImgLocation: D:/jhjh/content #어디에 이미지를 업로드할지 작성
+uploadPath: file:///D:/jhjh/ #파일 시스템의 경로.   /// : 로컬파일시스템의 경로
+#WebMvcConfig에서 설정한 url로 접속하면 D:/shop/ 경로에서 파일을 읽어오겠다는 의미
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.jhjh.member.mapper.MemberMapper">
+
+    <insert id="createMember" parameterType="memberDto" useGeneratedKeys="true" keyProperty="memberCode" keyColumn="member_code">
+        INSERT INTO member(id, password, name, email, tel, gender, birthday, address, nickname, role)
+        VALUES(#{id}, #{password}, #{name}, #{email}, #{tel}, #{gender}, #{birthday}, #{address}, #{nickname}, #{role})
+    </insert>
+
+    <select id="overlapId" resultType="String">
+        SELECT id
+        FROM member
+        WHERE id = #{id}
+    </select>
+
+    <select id="overlapNickname" resultType="String">
+        SELECT nickname
+        FROM member
+        WHERE nickname = #{nickname}
+    </select>
+
+    <select id="overlapEmail" resultType="String">
+        SELECT email
+        FROM member
+        WHERE email = #{email}
+    </select>
+
+    <select id="findMember" parameterType="String" resultType="memberDto">
+        SELECT member_code, id, password, name, email, tel, gender, birthday, address, nickname, role
+        FROM member
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateMember" parameterType="memberDto">
+        UPDATE member
+        SET password = #{password},
+        email = #{email},
+        tel = #{tel},
+        address = #{address},
+        nickname = #{nickname}
+        WHERE member_code = #{memberCode}
+    </update>
+
+
+</mapper>

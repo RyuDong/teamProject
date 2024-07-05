@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.jhjh.contentDtl.mapper.ContentDtlMapper">
+
+<!--  1개 컨텐츠의 대표사진 가져오기  -->
+    <select id="getRepImg" resultType="contentImgDto">
+        SELECT content_img_code, content_code, img_name, ori_img_name, img_url, rep_img_yn
+        FROM content_img
+        WHERE content_code = #{contentCode}
+        AND rep_img_yn = 'Y';
+    </select>
+
+    <select id="getContentImg" resultType="contentImgDto">
+        SELECT content_img_code, c.content_code, img_name, ori_img_name, img_url, rep_img_yn
+        FROM contents c JOIN content_img ci ON c.content_code = ci.content_code
+        WHERE c.content_code = #{contentCode}
+        AND rep_img_yn = 'N';
+    </select>
+
+    <select id="getContentDtl" resultType="contentDtlDto">
+        SELECT c.content_code, content_title, content_type, start_date, end_date, place, run_time, day_off,
+        content_option_code, toilet, parking_lot, for_kids, cost, description_short, description_long
+        FROM contents c JOIN content_option co ON c.content_code=co.content_code
+        WHERE c.content_code = #{contentCode};
+    </select>
+
+    <select id="getMonthContent" resultType="contentDtlDto">
+        SELECT c.content_code, content_title, start_date, end_date, description_short, img_url
+        FROM contents c JOIN content_option co ON c.content_code=co.content_code
+        JOIN content_img ci ON c.content_code = ci.content_code
+        WHERE MONTH(start_date) = MONTH(CURRENT_DATE())
+        AND rep_img_yn = 'Y'
+        LIMIT 1;
+    </select>
+
+    <sql id="contentSearchConditions">
+        <if test="contentSearchDto.searchText != null and contentSearchDto.searchText != ''">
+            AND ( content_title LIKE CONCAT ('%', #{contentSearchDto.searchText}, '%')
+            OR content_type LIKE CONCAT ('%', #{contentSearchDto.searchText}, '%'))
+        </if>
+    </sql>
+
+    <select id="getMainContent" resultType="contentDtlDto" parameterType="map">
+        SELECT c.content_code, content_title, content_type, start_date, end_date, run_time, day_off, place,
+        DESCRIPTION_short, img_url
+        from contents c JOIN content_option co ON c.content_code = co.content_code
+        JOIN content_img ci ON c.content_code=ci.content_code
+        WHERE rep_img_yn = 'Y'
+            <include refid="contentSearchConditions" />
+        ORDER BY start_date DESC
+        LIMIT #{pageSize} OFFSET #{page};
+    </select>
+
+    <select id="countMainContent" parameterType="map">
+        SELECT COUNT(*)
+        FROM contents
+        <where>
+            <include refid="contentSearchConditions" />
+        </where>
+    </select>
+
+
+
+
+
+
+</mapper>

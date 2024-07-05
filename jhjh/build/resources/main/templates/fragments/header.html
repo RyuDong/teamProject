@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div th:fragment="header">
+    <nav class="header_nav">
+
+        <a class="header_nav_logo" href="/">
+            <img src="/img/icon/logo.png">
+        </a>
+
+        <ul class="header_nav_menu">
+            <li class="header_nav_menu_li" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a class="nav-link" href="/admin/contentList" >콘텐츠 리스트</a>
+            </li>
+            <li class="header_nav_menu_li" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/myComment">내 코멘트 보기</a>
+            </li>
+            <li class="header_nav_menu_li"  sec:authorize="isAnonymous()">
+                <a class="nav-link" href="/member/new">회원가입</a>
+            </li>
+            <li class="header_nav_menu_li" sec:authorize="isAnonymous()">
+                <a class="nav-link" href="/member/login">로그인</a>
+            </li>
+            <li class="header_nav_menu_li" sec:authorize="isAuthenticated()">
+                <a class="nav-link"  href="/member/info">회원정보 변경</a>
+            </li>
+            <li class="header_nav_menu_li" sec:authorize="isAuthenticated()">
+                <a class="nav-link"  href="/member/logout">로그아웃</a>
+            </li>
+        </ul>
+
+
+
+
+    </nav>
+</div>
+
+</html>

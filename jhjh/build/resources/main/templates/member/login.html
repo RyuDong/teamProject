@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>로그인</title>
+</head>
+
+<th:block layout:fragment="css">
+    <style>
+        h3 {
+            text-align: center;
+        }
+
+        .loginbox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input{
+            width: 150px;
+            padding: 6px 10px;
+            margin: 6px 0;
+            display:inline-block;
+            border : 2px solid black;
+            border-radius: 4px;
+        }
+        .error {
+            color: #bd2130;
+        }
+        button {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: medium;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content">
+    <h3>로그인</h3>
+    <br>
+    <form role="form" method="post" action="/member/login">
+        <div class="loginbox">
+            <label th:for="id">아이디</label>
+            <input type="text" id="id" name="id"  ><br>
+
+            <label th:for="password">비밀번호 </label>
+            <input type="password" id="password" name="password" ><br>
+
+            <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+
+            <button>로그인</button>
+            <br>
+            <button type="button" onClick="location.href='/member/new'">회원가입</button>
+
+        </div>
+    </form>
+</div>
+
+</html>

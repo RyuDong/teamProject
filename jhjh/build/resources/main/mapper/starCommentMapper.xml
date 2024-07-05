@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.jhjh.starComment.mapper.StarCommentMapper">
+
+    <select id="getStarAverage">
+        SELECT IFNULL(ROUND(SUM(star_point_value) / COUNT(*)), 0)
+        FROM star_point
+        WHERE content_code = #{contentCode};
+    </select>
+
+    <select id="getMember" resultType="memberDto">
+        SELECT member_code
+        FROM member
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertStarPoint" parameterType="map" useGeneratedKeys="true" keyProperty="starPointCode" keyColumn="star_point_code">
+        INSERT INTO star_point(star_point_value, content_code, member_code)
+        VALUES(#{starPointValue}, #{contentCode}, #{memberCode})
+    </insert>
+
+    <insert id="insertComment" parameterType="map" useGeneratedKeys="true" keyColumn="comment_code" keyProperty="commentCode">
+        INSERT INTO comment(comment_text, content_code, star_point_code)
+        VALUES(#{commentText}, #{contentCode}, #{starPointCode})
+    </insert>
+
+<!--    같은 컨텐츠에 별점을 평가한적 있는지 확인-->
+    <select id="overlapStar" resultType="starPointDto" parameterType="map">
+        SELECT star_point_code, content_code, member_code, star_point_value, star_point_date
+        FROM star_point
+        WHERE content_code = #{contentCode}
+        AND member_code = #{memberCode};
+    </select>
+
+<!--    컨텐츠별 코멘트 보기-->
+    <select id="getComments" resultType="commentDto" parameterType="map">
+        SELECT comment_code, cm.star_point_code, c.content_code, comment_text, comment_create_date, comment_edit_date,
+        content_title, nickname
+        FROM comment cm JOIN star_point sp ON cm.star_point_code = sp.star_point_code
+        JOIN member m ON sp.member_code = m.member_code
+        JOIN contents c ON cm.content_code = c.content_code
+        WHERE c.content_code = #{contentCode}
+        ORDER BY comment_create_date DESC
+        LIMIT #{pageSize} OFFSET #{page};
+    </select>
+
+    <select id="countComments" parameterType="map">
+        SELECT COUNT(*)
+        FROM comment
+        WHERE content_code = #{contentCode};
+    </select>
+
+<!--    내 코멘트들 보기-->
+    <select id="getMyComments" resultType="commentDto"  parameterType="map">
+        SELECT comment_code, cm.star_point_code, c.content_code, comment_text, comment_create_date, comment_edit_date,
+        content_title, nickname
+        FROM comment cm JOIN star_point sp ON cm.star_point_code = sp.star_point_code
+        JOIN member m ON sp.member_code = m.member_code
+        JOIN contents c ON cm.content_code = c.content_code
+        WHERE m.member_code = #{memberCode}
+        ORDER BY comment_create_date DESC
+        LIMIT #{pageSize} OFFSET #{page};
+    </select>
+
+    <select id="countMyComment" parameterType="map">
+        SELECT COUNT(*)
+        FROM comment c JOIN star_point sp ON c.star_point_code = sp.star_point_code
+        JOIN member m ON sp.member_code = m.member_code
+        WHERE m.member_code = #{memberCode};
+    </select>
+
+    <delete id="deleteComment">
+        DELETE FROM comment
+        WHERE comment_code = #{commentCode}
+    </delete>
+
+<!--    코멘트 수정할때 조회-->
+    <select id="getMyComment" resultType="commentDto">
+        SELECT comment_code, cm.star_point_code, c.content_code, comment_text, comment_create_date, comment_edit_date, sp.member_code,
+        content_title, nickname, id
+        FROM comment cm JOIN star_point sp ON cm.star_point_code = sp.star_point_code
+        JOIN member m ON sp.member_code = m.member_code
+        JOIN contents c ON cm.content_code = c.content_code
+        WHERE comment_code = #{commentCode}
+    </select>
+
+    <update id="updateComment" parameterType="map">
+        UPDATE comment
+        SET comment_text = #{commentText}
+        WHERE comment_code = #{commentCode}
+    </update>
+
+</mapper>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>행사 상세 보기</title>
+</head>
+
+<th:block layout:fragment="css">
+    <style>
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            padding : 20px 0;
+        }
+        .detail1 {
+            padding : 0 40px;
+            width: 600px;
+        }
+
+        .detail1 ul{
+            justify-content: space-between;
+            list-style: none;
+        }
+
+        .detail1 ul .repImgDiv{
+            padding : 20px;
+        }
+
+        .detail1 ul .repImgDiv img {
+            width : 100%;
+        }
+
+        .detail1 li{
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .detail1 li p{
+            padding : 0 20px;
+        }
+
+        .detail2 {
+            padding: 30px 0;
+        }
+
+        .after_estimate {
+             padding-bottom: 80px;
+        }
+
+        .btn01 {
+            display:block;
+            width: 300px;
+            font-weight: bold;
+            border: 0;
+            border-radius: 10px;
+            max-height: 50px;
+            padding: 15px 0;
+            font-size: 1.1em;
+            text-align: center;
+            background:bisque;
+        }
+
+        .star_box {
+            padding-bottom: 60px;
+        }
+
+        .star_result {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background: url('https://png.pngtree.com/png-clipart/20221206/ourmid/pngtree-yellow-star-3d-icon-png-image_6511591.png') no-repeat;
+            background-size: 100%;
+            box-sizing: border-box;
+            padding-bottom: 60px;
+        }
+
+        .star_point_value {
+            width: 100%;
+            box-sizing: border-box;
+            display: inline-flex;
+            float: left;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .star_point_value .star {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+            display: inline-block;
+            background: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE2bww%2FbtsviSSBz4Q%2F5UYnwSWgTlFt6CEFZ1L3Q0%2Fimg.png') no-repeat;
+            background-size: 100%;
+            box-sizing: border-box;
+        }
+
+        .star_point_value .star.on {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+            display: inline-block;
+            background: url('https://blog.kakaocdn.net/dn/b2d6gV/btsvbDoal87/XH5b17uLeEJcBP3RV3FyDk/img.png') no-repeat;
+            background-size: 100%;
+            box-sizing: border-box;
+        }
+
+        .comment {
+            width: 500px;
+            box-sizing: border-box;
+            display: inline-block;
+            margin: 15px 0;
+            background: #F3F4F8;
+            border: 0;
+            border-radius: 10px;
+            height: 100px;
+            resize: none;
+            padding: 15px;
+            font-size: 13px;
+            font-family: sans-serif;
+        }
+
+        .btn02 {
+            display:block;
+            width: 500px;
+            font-weight: bold;
+            border: 0;
+            border-radius: 10px;
+            max-height: 50px;
+            padding: 15px 0;
+            font-size: 1.1em;
+            text-align: center;
+            background:bisque;
+        }
+
+        .fldImgDiv img {
+            width: 100%;
+        }
+
+    </style>
+</th:block>
+
+<th:block layout:fragment="script" >
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            $('form').on('submit', function(event) {
+                event.preventDefault();
+                estimate();
+            });
+
+            $('.star_point_value > .star').on('click', function() {
+                $(this).siblings().removeClass('on');
+                $(this).addClass('on').prevAll().addClass('on');
+                $(this).siblings().removeClass('point');    //추가
+                $(this).addClass('point');  //추가
+            });
+        });
+
+
+         async function estimate() {
+
+           let url = "/starComment";
+           let contentCode = $(".contentCode").val();
+
+           let paramData = {
+               starPointValue: $('.point').attr('value'), //변경
+               commentText: $("#commentText").val(),
+               contentCode: contentCode
+           };
+
+           let param = JSON.stringify(paramData);
+
+           try{
+               const response = await fetch(url,{
+                   method : 'POST',
+                   headers: {
+                       'Content-Type': 'application/json',
+                   },
+                   body: param,
+                   cache: 'no-cache'
+               })
+
+               if(response.status==401) {
+                   alert("로그인 후 이용해주세요");
+                   location.href = "/member/login";
+                   return;
+               }
+
+               if(!response.ok) {
+                   const errorText = await response.text();
+                   throw new Error(errorText);
+               }
+
+               const result = await response.json();
+               alert("평가가 완료되었습니다.");
+               location.href="/contentDtl/" +  contentCode;
+           } catch(error) {
+               alert(error.message);
+           }
+        }
+
+
+
+        function viewComment() {
+            let contentCode = $(".contentCode").val();
+            location.href="/comment/"+ contentCode
+        }
+
+        $(document).ready(function() {
+            let errorMessage=/*[[${errorMessage}]]*/ "";
+            if(errorMessage != null) {
+                alert(errorMessage);
+            }
+        })
+
+    </script>
+</th:block>
+
+<div layout:fragment="content" class="content">
+    <div class="detail" id="detail" name="detail">
+
+        <div class="detail1" id="detail1" name="detail1">
+            <ul>
+                <li>
+                    <div class="repImgDiv"><img th:src="${repImg.imgUrl}" th:alt="${repImg.imgName}"></div>
+                    <h3 th:text="${contentDtl.contentTitle}">제목</h3>
+                    <h6>유형</h6>
+                    <p th:text="${contentDtl.contentTitle}">유형</p>
+                    <h6>장소</h6>
+                    <p th:text="${contentDtl.place}">장소</p>
+                    <h6>행사기간</h6>
+                    <span th:text="${contentDtl.startDate}">시작</span>
+                    <span>~</span>
+                    <span th:text="${contentDtl.endDate}">종료</span>
+                    <br>
+                    <p><h6>운영시간</h6></p>
+                    <p th:text="${contentDtl.runTime}">운영시간</p>
+                    <h6>휴무일</h6>
+                    <p th:text="${contentDtl.dayOff}">휴무일</p>
+                    <h6>간략소개</h6>
+                    <p th:text="${contentDtl.descriptionShort}">간략 소개글</p>
+                </li>
+            </ul>
+        </div> <!--detail1-->
+
+        <div class="detail2" id="detail2" name="detail2">
+            <h4>평균 별점</h4>
+            <div class="after_estimate" >
+                <span class="star_result"  value="1" th:if="${starAvg >= 1}"> </span>
+                <span class="star_result"  value="2" th:if="${starAvg >= 2}"> </span>
+                <span class="star_result" value="3" th:if="${starAvg >= 3}"> </span>
+                <span class="star_result" value="4" th:if="${starAvg >= 4}"> </span>
+                <span class="star_result" value="5" th:if="${starAvg >= 5}"> </span>
+                <span th:if="${starAvg < 1}"> 평가된 별점이 없습니다. </span>
+                <input type="hidden" th:value="${contentDtl.contentCode}" class="contentCode">
+                <button type="button" class="btn01" onclick="viewComment()">코멘트 보기</button>
+            </div> <!-- after_estimate-->
+
+
+            <div class="star_box" id="star_box" name="star_box">
+                <h4>별점 평가하기</h4>
+                <div class ="star_point_value" id="starPointValue">
+                    <span  class="star on" name="star_on" value="1"> </span>
+                    <span class="star" name="star" value="2"> </span>
+                    <span class="star" name="star" value="3"> </span>
+                    <span class="star" name="star" value="4"> </span>
+                    <span class="star" name="star" value="5"> </span>
+                </div> <!--star_rating-->
+                <textarea class="comment" id="commentText" name="comment" placeholder="코멘트 내용을 작성해주세요." ></textarea>
+                <br>
+                <button type="submit" class="btn02"  onclick="estimate()" >코멘트 등록</button>
+            </div> <!--star_box-->
+
+            <div class="holder" id="holder" name="holder">
+                <h4>주최자/참여자</h4>
+                <h6>주최자명</h6>
+                <p  th:text="${holder.holderName}">주최자명</p>
+                <h6>개인/단체구분</h6>
+                <p th:text="${holder.individual}" >개인구분</p>
+                <h6>문의처</h6>
+                <p th:text="${holder.enquiry}">문의처</p>
+                <h6>문의처 연락처</h6>
+                <p th:text="${holder.enquiryTel}">문의처 전화번호</p>
+                <h6>참여자명</h6>
+                <p th:text="${creator.creatorName}">참여자명</p>
+            </div> <!--holder-->
+        </div> <!--detail2-->
+    </div> <!--detail-->
+
+    <div class="detail3" id="detail3" name="detail3">
+        <h4>행사 상세 보기</h4>
+        <p th:text="${contentDtl.descriptionLong}">상세설명</p>
+        <h6>화장실 유무</h6>
+        <p th:text="${contentDtl.toilet}">화장실</p>
+        <h6>화장실 유무</h6>
+        <p th:text="${contentDtl.toilet}">화장실</p>
+        <h6>주차장 유무</h6>
+        <p th:text="${contentDtl.parkingLot}">주차장</p>
+        <h6>관람연령</h6>
+        <p th:text="${contentDtl.forKids}">관람연령</p>
+        <h6>비용</h6>
+        <p th:text="${contentDtl.cost}">비용</p>
+        <h4>상세 이미지</h4>
+        <br>
+        <div th:each="contentImg : ${contentImgDtoList}" class="text-center">
+            <img th:if="${not #strings.isEmpty(contentImg)}" th:src="${contentImg.imgUrl}" class="rounded mgb-15" width="800">
+        </div>
+    </div><!--detail3-->
+
+    <script th:inline="javascript">
+        $('.star_point_value > .star').click(function() {
+            $(this).parent().children('span').removeClass('on');
+            $(this).addClass('on').prevAll('span').addClass('on');
+          })
+    </script>
+
+</div> <!--layout:fragment="content"-->
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>내 코멘트 보기</title>
+</head>
+
+<th:block layout:fragment="css">
+    <style>
+        h2 {
+            padding-bottom: 30px;
+        }
+        .container {
+            text-align: center;
+        }
+
+        .button {
+         display: inline-block;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+    </style>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            let successMessage=/*[[${successMessage}]]*/ "";
+            if(successMessage != null) {
+                alert(successMessage);
+            }
+        })
+
+        function page(page) {
+            location.href="/myComment/" + page;
+        }
+    </script>
+</th:block>
+
+<div layout:fragment="content" class="content">
+    <form role="form" method="get" th:action="@{'/myComment/'+${page}}">
+        <h2>내 코멘트 보기</h2>
+        <div class="row">
+            <th:block th:each="comment : ${commentList}" >
+                <div class="col-md-4 margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">[[${comment.contentTitle}]]</h4>
+                            <h5 class="card-title">작성자 : [[${comment.nickname}]]</h5>
+                            <p class="card-text">작성일 : [[${comment.commentCreateDate}]]</p>
+                            <p class="card-text">수정일 : [[${comment.commentEditDate}]]</p>
+                            <h3 class="card-title text-danger">[[${comment.commentText}]]</h3>
+                            <input type="hidden" th:value="${comment.commentCode}">
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <a  class=button th:href="@{'/myComment/view/'+${comment.commentCode}}">수정하기</a>
+                        <br>
+                        <a  class=button th:href="@{'/myComment/delete/'+${comment.commentCode}}">삭제하기</a>
+                    </div>
+                    
+                <br><br><br>
+                </div>
+            </th:block>
+
+            <th:block th:if="${#lists.isEmpty(commentList)}"> <div> 작성한 코멘트가 없습니다. </div> </th:block>
+        </div>
+
+        <div th:with="start=${pageHandler.beginPage},end=${pageHandler.endPage}">
+            <ul class="pagination justify-content-center">
+
+                <li  th:if="${not pageHandler.firstPage}" class="page-item" th:classappend="${pageHandler.firstPage} ? 'disabled' : '' ">
+                    <a th:onclick="'javascript:page(' + ${page-1} + ')'" aria-label='Previous' class="page-link" >
+                        <span aria-hidden='true'>Previous</span>
+                    </a>
+                </li>
+
+                <li th:each="page : ${#numbers.sequence(start,end)}"  th:if="${page != 0}" th:classappend="${pageHandler.page eq page} ? 'active' : '' " class="page-item" >
+                    <a th:onclick="'javascript:page(' + ${page} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                </li>
+
+                <li th:if="${not pageHandler.lastPage}" th:classappend="${pageHandler.lastPage} ? 'disabled' : '' " class="page-item" >
+                    <a th:onclick="'javascript:page(' + ${page+1} + ')'" aria-label='Next' class="page-link">
+                        <span aria-hidden='true'>Next</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </form>
+</div>
+
+</html>
